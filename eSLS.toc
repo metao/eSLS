@@ -1,0 +1,15 @@
+## Interface: 50001
+## Title: eSLS
+## Author: metao
+## Version: 1.2
+## Notes: Easy Shroud Loot System addon.  Developed to meet the requirements of Nightwatch, Korgath-US-H.
+## eMail: metao@hotmail.com
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: eSLS_auctionTime,eSLS_saveBid,eSLS_stdBid,eSLS_channel,eSLS_outPrefix,eSLS_slash1,eSLS_currentItem,eSLS_inPrefix,eSLS_slash2,eSLS_minPointsToShroud,eSLS_allowStdToBeatLowShroud,eSLS_pointsPerPeriod,eSLS_pointsPeriod,eSLS_pointsForStarting,eSLS_pointsForEnding,eSLS_points,eSLS_currentRaid,eSLS_lastRaid,eSLS_winners
+eSLS.lua
+eSLS_auctioneer.lua
+eSLS_auctioneer
+eSLS_timer.lua
+eSLS_commander.lua
+eSLS_raid_manager.lua
