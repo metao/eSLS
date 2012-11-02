@@ -27,7 +27,7 @@ public class eSLSInterpreter
 	{
 		points = new TreeMap<String, Integer>();
 		// GUI to find filepath
-		this.scriptFilePath = "C:\\Users\\wzbvnr\\workspace\\eSLSInterpreter\\src\\eSLS.lua"; // Should be GUI returned value
+		this.scriptFilePath = "src\\eSLS.lua"; // Should be GUI returned value
 		loadVariables();
 		this.outputFilePath = "eSLSInterpreterOutput.txt"; //Should be GUI returned value
 		printOutputFile();
@@ -61,6 +61,7 @@ public class eSLSInterpreter
 		     System.out.println( "eval: "+cs.eval(b) );
 
                Object something = b.get("eSLS_stdBid");
+		     System.out.println(something);
 		     
 		     // Points table
 		     LuaTable luaPoints = (LuaTable)b.get("eSLS_points");
@@ -91,6 +92,7 @@ public class eSLSInterpreter
 	{
 		File n;
 	     FileWriter fos = null;
+	     int totalPointsRecorded = 0;
 		try
           {
 		     n = new File(this.outputFilePath);
@@ -98,7 +100,9 @@ public class eSLSInterpreter
 	          for( String s : points.keySet())
 	          {
 		     	fos.write(s + "\t" + points.get(s) + "\n");
+		     	totalPointsRecorded += points.get(s);
 	          }
+	          fos.write("=======================\nTotal Points Recorded: " + totalPointsRecorded);
           } catch (IOException e)
           {
           	//GUI print Error; Error in writing output to file
