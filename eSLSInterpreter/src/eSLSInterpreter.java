@@ -16,14 +16,7 @@ import javax.script.SimpleBindings;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 
-/**
- * 
- */
-
-/**
- * @author wzbvnr
- *
- */
+@SuppressWarnings("unused")
 public class eSLSInterpreter
 {
 	private TreeMap<String, Integer> points;
@@ -67,7 +60,7 @@ public class eSLSInterpreter
 		     cs = ((Compilable)e).compile(reader);
 		     System.out.println( "eval: "+cs.eval(b) );
 
-		     Object something = b.get("eSLS_stdBid");
+               Object something = b.get("eSLS_stdBid");
 		     
 		     // Points table
 		     LuaTable luaPoints = (LuaTable)b.get("eSLS_points");

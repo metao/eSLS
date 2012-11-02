@@ -7,7 +7,8 @@ public class Main
 	public static void main(String[] args)
 	{
 		//Instantiate the interpreter, allowing it to do the calculations
-		eSLSInterpreter e = new eSLSInterpreter();
+		@SuppressWarnings("unused")
+          eSLSInterpreter e = new eSLSInterpreter();
 		//Attach the Gui
 	}
 
