@@ -28,29 +28,7 @@ local function eSLS_getPlayer(index)
     return player
 end
 
-----------------------------------------------------------------
-function eSLS_getIndexFromName(name)
-
-    if not name then
-        --print("eSLS_getIndexFromName: nil")
-        return nil
-    end
-
-    --print("eSLS_getIndexFromName: "..name)
-
-    for i = 1, GetRealGroupMembers() do
-
-        player = eSLS_getPlayer(i)
-    
-        if player.name == name then
-            return player.index
-        end
-    end
-    
-    return nil
-end
-
-----------------------------------------------------------------
+---------------------------------------------------------
 local function eSLS_reportPlayer(name)
 
     local p = eSLS_currentRaid[name]
@@ -132,7 +110,7 @@ function eSLS:stopRaid()
     
     eSLS_lastRaid = {}
     
-    -- serialise points
+    -- serialize points
     for player_name, v in pairs(eSLS_currentRaid) do
 
         if eSLS_points[player_name] then

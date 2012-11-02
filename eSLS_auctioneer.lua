@@ -173,9 +173,7 @@ function eSLS:addBid(sender, msg)
     
         this_bid_priority = priority_save
         this_bid_points = eSLS_saveBid
-
-        local i = eSLS_getIndexFromName(sender)
-
+        
         -- check current points and adjust if required
         if senders_points < eSLS_stdBid then
             this_bid_points = senders_points
@@ -186,8 +184,6 @@ function eSLS:addBid(sender, msg)
         this_bid_priority = priority_std
         this_bid_points = eSLS_stdBid
 
-        local i = eSLS_getIndexFromName(sender)
-
         -- check current points and adjust if required
         if senders_points < eSLS_stdBid then
             this_bid_points = senders_points
@@ -196,8 +192,6 @@ function eSLS:addBid(sender, msg)
     elseif msg == "!eshroud" then
     
         this_bid_priority = priority_shroud
-
-        local i = eSLS_getIndexFromName(sender)
 
         -- check current points and adjust if required
         if senders_points < eSLS_minPointsToShroud then
