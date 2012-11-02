@@ -1,4 +1,4 @@
-﻿
+
 -- local openBidding closeBidding placeBid cancelBidding onEvent
 
 local bids = {}
@@ -103,34 +103,53 @@ function eSLS:closeBidding()
     else
         
         SendChatMessage(eSLS_outPrefix.."Bidders:", eSLS_channel)    
+        -- Table to hold the players who bid on item. tells all the people who should to roll
+        local rollplayers = {}
+        local rollplayersindex = 1
         
         -- scroll through bids, adding them to the list, until one has a lower bid or priority
         local winners_str  = ""
         local winners = 0
         for i = 1, #bids do
         
-            SendChatMessage(eSLS_outPrefix..bids[i].name..": ".."("..bids[i].priority..") "..bids[i].bid, eSLS_channel)
+        	local bidText = ""
+        	
+        	if(bids[i].priority == priority_shroud) then bidText = "Shroud"
+        	elseif(bids[i].priority == priority_std) then bidText = "Standard"
+        	elseif(bids[i].priority == priority_save) then bidText = "Save"
+        	end
+        	
+            SendChatMessage(eSLS_outPrefix..bids[i].name..": ".."("..bidText..") "..bids[i].bid, eSLS_channel)
             if (bids[i].bid ~= bids[1].bid) or (bids[i].priority ~= bids[1].priority) then
             
                 break
             end
-            
+            rollplayers[rollplayersindex] = bids[i].name
+            rollplayersindex = rollplayersindex + 1
             winners_str = winners_str .. " " .. bids[i].name
             winners = winners + 1
         end
         
         if winners == 1 then
             SendChatMessage(eSLS_outPrefix.."Winner: " .. bids[1].name .. " for " .. bids[1].bid, eSLS_channel)
+            eSLS:winner(bids[1].name, bids[1].bid, eSLS_currentItem)
         else
         
             SendChatMessage(eSLS_outPrefix.."Equal bids for " .. bids[1].bid .. " from:" .. winners_str, eSLS_channel)
             SendChatMessage(eSLS_outPrefix.."Roll off!", eSLS_channel)
             
             -- implement roll monitor OR
+            
+            -- Whisper players to roll
+            for i = 1, #rollplayers do        
+	            SendChatMessage(eSLS_outPrefix.."You are currently contesting loot, please roll!", "WHISPER", nil, rollplayers[i] )
+	        end
+            
         end
         -- trigger a watcher for giving out loot, record the target and deduct DKP
     end
     
+    table.wipe(rollplayers)
     eSLS_currentItem = nil
     table.wipe(bids)
 end
@@ -204,7 +223,7 @@ function eSLS:addBid(sender, msg)
         end
     else
     
-        print("This bugged out!")
+        print("This bugged out! No proper command was recognized!")
     end
 
     SendChatMessage(eSLS_outPrefix.."You have "..msg.." for "..this_bid_points.." points on "..eSLS_currentItem, "WHISPER", nil, sender)

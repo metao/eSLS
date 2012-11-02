@@ -1,4 +1,4 @@
-﻿
+
 ----------------------------------------------------------------
 function eSLS:winner(player, points, item)
 
@@ -9,7 +9,7 @@ function eSLS:winner(player, points, item)
     else
         eSLS_winners = {}
     end
-
+    
     eSLS_winners[i] = player.." "..points.." "..item
 end
 
@@ -337,6 +337,19 @@ end
 ----------------------------------------------------------------
 function eSLS:updateRaid()
     
+    
+    --Currently, this checks if the players in the raid with players in it's own table.
+    -- If they don't exist, add them
+    --Otherwise it checks if players are in the table, but not in the raid
+    --if they are not, it reports a message.
+    -- Unforutnatley, this also checks for /away or offlines.
+    
+   	--This SHOULD move these people into a separate table, and check that separate table
+   	-- once every 5 mins, or on raid updates when points are given out. (since points will be on a consistent schedule)
+   	-- Second option is to set a disconnect time, and only check later on
+   	
+   	-- Third option is to remove the functionality of check for offlines, seems to be a separate method of handling it anyway.
+   	
     if not eSLS_currentRaid then
         return
     end
@@ -359,13 +372,16 @@ function eSLS:updateRaid()
             my_player.points = 0
             my_player.joinTime = GetTime()
             my_player.hold = 0
+            my_player.reportedHold = 0
 
             eSLS_currentRaid[player.name] = my_player
         end
 
+		-- UnitIsAFK is the wrong method to use. It may detect offlines, but it also detects /away tags. 
         -- detect the newly afk
-        if UnitIsAFK(player.unitid) and (eSLS_currentRaid[player.name].hold == 0) then
+        if UnitIsAFK(player.unitid) and (eSLS_currentRaid[player.name].hold == 0) and (eSLS_currentRaid[player.name].reportedHold == 0) then
             print(eSLS_outPrefix.."OFFLINE ALERT - you should hold points for offline player: "..player.name)
+            eSLS_currentRaid[player.name].reportedHold = 1
         end
     end
     
@@ -383,8 +399,9 @@ function eSLS:updateRaid()
             end
         end
     
-        if ((found == false) and (eSLS_currentRaid[player_name].hold == 0)) then
+        if ((found == false) and (eSLS_currentRaid[player_name].hold == 0) and (eSLS_currentRaid[player.name].reportedHold == 0)) then
             print(eSLS_outPrefix.."QUITTER ALERT - you should hold points for player not in raid: "..player_name)
+            eSLS_currentRaid[player.name].reportedHold = 1
         end
     end
     

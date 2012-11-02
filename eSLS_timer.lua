@@ -1,4 +1,4 @@
-﻿local tasks = {}
+local tasks = {}
 
 ----------------------------------------------------------------
 local function sortTasks(t1, t2)

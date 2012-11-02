@@ -1,4 +1,4 @@
-﻿eSLS = CreateFrame("Frame")
+eSLS = CreateFrame("Frame")
 
 ---------------------------------------------------------------
 -- config items, you can change these
@@ -25,7 +25,11 @@ end
 
 eSLS_currentRaid = nil
 eSLS_lastRaid = nil
-eSLS_winners = nil
+
+-- Start a table for loot tracking if not started already
+if not eSLS_winners then
+    eSLS_winners = {}
+end
 
 -- not implemented
 eSLS_allowStdToBeatLowShroud = true
