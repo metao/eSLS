@@ -148,10 +148,13 @@ function eSLS:closeBidding()
         end
         -- trigger a watcher for giving out loot, record the target and deduct DKP
     end
-    
+    if rollplayers then
     table.wipe(rollplayers)
+	end
     eSLS_currentItem = nil
-    table.wipe(bids)
+    if bids then
+	    table.wipe(bids)
+	end
 end
         
 ----------------------------------------------------------------

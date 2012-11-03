@@ -38,7 +38,7 @@ function eSLS_getIndexFromName(name)
 
     --print("eSLS_getIndexFromName: "..name)
 
-    for i = 1, GetRealGroupMembers() do
+    for i = 1, GetNumGroupMembers() do
 
         player = eSLS_getPlayer(i)
     
