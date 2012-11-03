@@ -1,4 +1,4 @@
-﻿
+
 SLASH_eSLS1 = eSLS_slash1
 SLASH_eSLS2 = eSLS_slash2
 
@@ -20,7 +20,7 @@ local function printRaidHelp(sender)
     SendChatMessage(eSLS_outPrefix.." !estandard - bid 10 points (normal priority)", channel, nil, sender)
     SendChatMessage(eSLS_outPrefix.." !esave     - bid 10 points, but not if someone else wants it (low priority/sidegrade)", channel, nil, sender)
     SendChatMessage(eSLS_outPrefix.." !ecancel   - cancel a bid", channel, nil, sender)
-    SendChatMessage(eSLS_outPrefix.." !epoints   - see how many points you have [NOT IMPLEMENTED]", channel, nil, sender)
+    SendChatMessage(eSLS_outPrefix.." !epoints   - see how many points you have", channel, nil, sender)
 end
 
 ----------------------------------------------------------------
